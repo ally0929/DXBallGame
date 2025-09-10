@@ -23,13 +23,16 @@ public class ball : MonoBehaviour
     }
     void OnTriggerEnter2D(Collider2D collison)
     {
-        if (collison.gameObject.CompareTag("paddle"))
-            direction.y = -direction.y;
-        if (collison.gameObject.CompareTag("brick"))
         {
-            direction.y = -direction.y;
-            Destroy(collison.gameObject);
+            if (collison.gameObject.CompareTag("paddle"))
+                direction.y = -direction.y;
+            else if (collison.gameObject.CompareTag("topWall"))
+                direction.y = -direction.y;
+            else if (collison.gameObject.CompareTag("wall"))
+                direction.x = -direction.x;
+            else if (collison.gameObject.CompareTag("bottomWall"))
+                Debug.Log("Game over");
         }
+
     }
-    
 }
