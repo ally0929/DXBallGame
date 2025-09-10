@@ -21,8 +21,15 @@ public class ball : MonoBehaviour
         rb.linearVelocity = direction * speed;
 
     }
-    void OnTriggerEnter2D(Collider2D collison){
+    void OnTriggerEnter2D(Collider2D collison)
+    {
         if (collison.gameObject.CompareTag("paddle"))
             direction.y = -direction.y;
+        if (collison.gameObject.CompareTag("brick"))
+        {
+            direction.y = -direction.y;
+            Destroy(collison.gameObject);
+        }
     }
+    
 }
