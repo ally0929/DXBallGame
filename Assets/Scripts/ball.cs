@@ -21,18 +21,28 @@ public class ball : MonoBehaviour
         rb.linearVelocity = direction * speed;
 
     }
-    void OnTriggerEnter2D(Collider2D collison)
+    void OnCollisionEnter2D(Collision2D collision)
     {
+        if (collision.gameObject.CompareTag("paddle"))
         {
-            if (collison.gameObject.CompareTag("paddle"))
-                direction.y = -direction.y;
-            else if (collison.gameObject.CompareTag("topWall"))
-                direction.y = -direction.y;
-            else if (collison.gameObject.CompareTag("wall"))
-                direction.x = -direction.x;
-            else if (collison.gameObject.CompareTag("bottomWall"))
-                Debug.Log("Game over");
+            direction.y = -direction.y;
         }
-
+        else if (collision.gameObject.CompareTag("brick"))
+        {
+            direction.y = -direction.y;
+            Destroy(collision.gameObject); // destroy brick
+        }
+        else if (collision.gameObject.CompareTag("topWall"))
+        {
+            direction.y = -direction.y;
+        }
+        else if (collision.gameObject.CompareTag("wall"))
+        {
+            direction.x = -direction.x;
+        }
+        else if (collision.gameObject.CompareTag("bottomWall"))
+        {
+            Debug.Log("Game over");
+        }
     }
 }
